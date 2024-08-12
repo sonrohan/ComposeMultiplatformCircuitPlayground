@@ -23,9 +23,9 @@ import com.slack.circuit.runtime.presenter.Presenter
 import com.slack.circuit.runtime.screen.Screen
 import com.valentinilk.shimmer.shimmer
 import kotlinx.coroutines.delay
-import kotlinx.parcelize.Parcelize
+import org.sonrohan.composemultiplatformcircuitplayground.parcel.CommonParcelize
 
-@Parcelize
+@CommonParcelize
 data object AccountScreen : Screen {
     data class State(
         val firstName: String?,

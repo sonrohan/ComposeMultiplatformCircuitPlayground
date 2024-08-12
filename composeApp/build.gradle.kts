@@ -1,4 +1,3 @@
-import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
@@ -7,14 +6,19 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.compose.compiler)
-    id("kotlin-parcelize")
 }
+
+apply(plugin = libs.plugins.kotlin.plugin.parcelize.get().pluginId)
 
 kotlin {
     androidTarget {
         @OptIn(ExperimentalKotlinGradlePluginApi::class)
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_11)
+            freeCompilerArgs.addAll(
+                "-P",
+                "plugin:org.jetbrains.kotlin.parcelize:additionalAnnotation=org.sonrohan.composemultiplatformcircuitplayground.parcel.CommonParcelize",
+            )
         }
     }
     
@@ -30,7 +34,7 @@ kotlin {
     }
     
     sourceSets {
-        
+
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
@@ -44,6 +48,9 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.androidx.lifecycle.runtime.compose)
+
+            implementation(libs.circuit)
+            implementation(libs.placeholder)
         }
     }
 }
@@ -82,8 +89,6 @@ android {
     }
     dependencies {
         debugImplementation(compose.uiTooling)
-        implementation(libs.circuit)
-        implementation(libs.placeholder)
     }
 }
 

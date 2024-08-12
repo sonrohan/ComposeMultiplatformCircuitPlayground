@@ -20,9 +20,9 @@ import com.slack.circuit.runtime.screen.Screen
 import org.sonrohan.composemultiplatformcircuitplayground.screens.account.AccountScreen
 import com.valentinilk.shimmer.shimmer
 import kotlinx.coroutines.delay
-import kotlinx.parcelize.Parcelize
+import org.sonrohan.composemultiplatformcircuitplayground.parcel.CommonParcelize
 
-@Parcelize
+@CommonParcelize
 data object HomeScreen : Screen {
     data class State(
         val name: String?,
